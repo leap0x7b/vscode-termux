@@ -1,0 +1,16 @@
+Package: vscode-termux
+Version: 1.0.0
+Section: devel
+Architecture: all
+Maintainer: Leap of Azzam (leapofazzam123)
+Provides: visual-studio-code
+Depends: proot, proot-distro, x11-repo
+Conflicts: visual-studio-code
+Replaces: visual-studio-code
+Homepage: https://code.visualstudio.com/
+Description: Code editing. Redefined.
+ Visual Studio Code is a new choice of tool that combines the simplicity of a
+	code editor with what developers need for the core edit-build-debug cycle.
+	See https://code.visualstudio.com/docs/setup/linux for installation
+	instructions and FAQ.
+

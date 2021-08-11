@@ -1,0 +1,3 @@
+#!/data/data/com.termux/files/usr/bin/bash
+xhost + &>/dev/null
+proot-distro login debian-vscode --user vscode --shared-tmp -- env DISPLAY=$DISPLAY $PREFIX/bin/dbus-launch code --user-data-dir=/data/data/com.termux/files/home/.config/Code --no-sandbox $@
