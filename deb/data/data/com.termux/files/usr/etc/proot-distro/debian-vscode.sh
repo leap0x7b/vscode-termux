@@ -73,7 +73,7 @@ distro_setup() {
 	run_proot_cmd dpkg-divert --divert /usr/share/alsa/alsa.conf.pulse/50-pulseaudio.conf --rename  /usr/share/alsa/alsa.conf.d/50-pulseaudio.conf
 	run_proot_cmd useradd -d /data/data/com.termux/files/home vscode
 	# Replace `ELECTRON_RUN_AS_NODE=1 "$ELECTRON" "$CLI" "$@"` with "$ELECTRON" "$@" to fix VS Code doesn't run
-	sed 's:ELECTRON_RUN_AS_NODE=1 "$ELECTRON" "$CLI" "$@":"$ELECTRON" "$@":g' ./usr/share/code/bin/code
+	sed -i 's:ELECTRON_RUN_AS_NODE=1 "$ELECTRON" "$CLI" "$@":"$ELECTRON" "$@":g' ./usr/share/code/bin/code
 	#run_proot_cmd apt upgrade -yq
 	:
 }
