@@ -76,5 +76,4 @@ distro_setup() {
 	sed -i 's:ELECTRON_RUN_AS_NODE=1 "$ELECTRON" "$CLI" "$@":"$ELECTRON" "$@":g' ./usr/share/code/bin/code
 	#run_proot_cmd apt upgrade -yq
 	:
-
 }
