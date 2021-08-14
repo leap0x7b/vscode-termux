@@ -4,7 +4,7 @@ Section: devel
 Architecture: all
 Maintainer: Leap of Azzam (leapofazzam123)
 Provides: visual-studio-code
-Depends: proot, proot-distro, x11-repo
+Depends: proot, proot-distro, x11-repo, wget, gpg
 Conflicts: visual-studio-code
 Replaces: visual-studio-code
 Homepage: https://code.visualstudio.com/
