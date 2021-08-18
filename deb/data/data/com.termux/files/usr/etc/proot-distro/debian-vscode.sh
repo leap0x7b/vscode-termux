@@ -1,60 +1,14 @@
-##
-## Plug-in for installing Debian Unstable (Sid).
-##
-
+# This is a default distribution plug-in.
+# Do not modify this file as your changes will be overwritten on next update.
+# If you want customize installation, please make a copy.
 DISTRO_NAME="Visual Studio Code Termux (Debian Unstable/Sid)"
 
-# Rootfs is in subdirectory.
-DISTRO_TARBALL_STRIP_OPT=0
+TARBALL_URL['aarch64']="https://github.com/debuerreotype/docker-debian-artifacts/raw/dist-arm64v8/sid/rootfs.tar.xz"
+TARBALL_URL['arm']="https://github.com/debuerreotype/docker-debian-artifacts/raw/dist-arm32v7/sid/rootfs.tar.xz"
+TARBALL_URL['i686']="https://github.com/debuerreotype/docker-debian-artifacts/raw/dist-i386/sid/rootfs.tar.xz"
+TARBALL_URL['x86_64']="https://github.com/debuerreotype/docker-debian-artifacts/raw/dist-amd64/sid/rootfs.tar.xz"
 
-# You can override a CPU architecture to let distribution
-# be executed by QEMU (user-mode).
-#
-# You can specify the following values here:
-#
-#  * aarch64: AArch64 (ARM64, 64bit ARM)
-#  * armv7l:  ARM (32bit)
-#  * i686:    x86 (32bit)
-#  * x86_64:  x86 (64bit)
-#
-# Default value is set by proot-distro script and is equal
-# to the CPU architecture of your device (uname -m).
-#DISTRO_ARCH=$(uname -m)
-
-# Returns download URL and SHA-256 of file in this format:
-# SHA-256|FILE-NAME
-get_download_url() {
-	local deb_arch
-	local sha256
-
-	case "$DISTRO_ARCH" in
-		aarch64)
-			deb_arch="arm64v8"
-			;;
-		armv7l|armv8l)
-			deb_arch="arm32v7"
-			;;
-		i686)
-			deb_arch="i386"
-			;;
-		x86_64)
-			deb_arch="amd64"
-			;;
-	esac
-	#sha256="$(curl -L https://github.com/debuerreotype/docker-debian-artifacts/raw/dist-${deb_arch}/sid/rootfs.tar.xz.sha256)"
-
-	echo "https://github.com/debuerreotype/docker-debian-artifacts/raw/dist-${deb_arch}/sid/rootfs.tar.xz"
-}
-
-# Define here additional steps which should be executed
-# for configuration.
 distro_setup() {
-	# Hint: $PWD is the distribution rootfs directory.
-	#echo "hello world" > ./etc/motd
-
-	# Run command within proot'ed environment with
-	# run_proot_cmd function.
-	# Uncomment this to do system upgrade during installation.
 	echo 'deb http://deb.debian.org/debian sid main contrib non-free' > ./etc/apt/sources.list
 	run_proot_cmd apt update
 	run_proot_cmd apt install ca-certificates apt-transport-https -yq
@@ -74,6 +28,4 @@ distro_setup() {
 	run_proot_cmd useradd -d /data/data/com.termux/files/home vscode
 	# Replace `ELECTRON_RUN_AS_NODE=1 "$ELECTRON" "$CLI" "$@"` with "$ELECTRON" "$@" to fix VS Code doesn't run
 	sed -i 's:ELECTRON_RUN_AS_NODE=1 "$ELECTRON" "$CLI" "$@":"$ELECTRON" "$@":g' ./usr/share/code/bin/code
-	#run_proot_cmd apt upgrade -yq
-	:
 }
